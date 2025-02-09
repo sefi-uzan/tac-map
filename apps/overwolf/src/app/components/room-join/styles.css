@@ -1,0 +1,61 @@
+.join-room {
+    max-width: 400px;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #E5E7EB;
+}
+
+.room-input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(31, 41, 55, 0.5);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 0.375rem;
+    color: #E5E7EB;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.room-input:focus {
+    outline: none;
+    border-color: #60A5FA;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.room-input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.join-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.join-button:hover:not(:disabled) {
+    background-color: #1D4ED8;
+}
+
+.join-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #4B5563;
+}

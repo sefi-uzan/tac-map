@@ -1,0 +1,105 @@
+[2m> [22mwebpack-cli build node-env=production
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 9.61 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.spec.ts:[32m[1m5:1[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 3 |[39m [36mimport[39m { [33mAppService[39m } [36mfrom[39m [32m'./app.service'[39m[33m;[39m
+   [90m 4 |[39m
+  [31m[1m>[22m[39m[90m 5 |[39m describe([32m'AppController'[39m[33m,[39m () [33m=>[39m {
+   [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 6 |[39m   [36mlet[39m app[33m:[39m [33mTestingModule[39m[33m;[39m
+   [90m 7 |[39m
+   [90m 8 |[39m   beforeAll([36masync[39m () [33m=>[39m {[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.spec.ts:[32m[1m8:3[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'beforeAll'.
+  [0m [90m  6 |[39m   [36mlet[39m app[33m:[39m [33mTestingModule[39m[33m;[39m
+   [90m  7 |[39m
+  [31m[1m>[22m[39m[90m  8 |[39m   beforeAll([36masync[39m () [33m=>[39m {
+   [90m    |[39m   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m  9 |[39m     app [33m=[39m [36mawait[39m [33mTest[39m[33m.[39mcreateTestingModule({
+   [90m 10 |[39m       controllers[33m:[39m [[33mAppController[39m][33m,[39m
+   [90m 11 |[39m       providers[33m:[39m [[33mAppService[39m][33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.spec.ts:[32m[1m15:3[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 13 |[39m   })[33m;[39m
+   [90m 14 |[39m
+  [31m[1m>[22m[39m[90m 15 |[39m   describe([32m'getData'[39m[33m,[39m () [33m=>[39m {
+   [90m    |[39m   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+   [90m 17 |[39m       [36mconst[39m appController [33m=[39m app[33m.[39m[36mget[39m[33m<[39m[33mAppController[39m[33m>[39m([33mAppController[39m)[33m;[39m
+   [90m 18 |[39m       expect(appController[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.spec.ts:[32m[1m16:5[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 14 |[39m
+   [90m 15 |[39m   describe([32m'getData'[39m[33m,[39m () [33m=>[39m {
+  [31m[1m>[22m[39m[90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+   [90m    |[39m     [31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 17 |[39m       [36mconst[39m appController [33m=[39m app[33m.[39m[36mget[39m[33m<[39m[33mAppController[39m[33m>[39m([33mAppController[39m)[33m;[39m
+   [90m 18 |[39m       expect(appController[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m
+   [90m 19 |[39m     })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.spec.ts:[32m[1m18:7[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'expect'.
+  [0m [90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+   [90m 17 |[39m       [36mconst[39m appController [33m=[39m app[33m.[39m[36mget[39m[33m<[39m[33mAppController[39m[33m>[39m([33mAppController[39m)[33m;[39m
+  [31m[1m>[22m[39m[90m 18 |[39m       expect(appController[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m
+   [90m    |[39m       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 19 |[39m     })[33m;[39m
+   [90m 20 |[39m   })[33m;[39m
+   [90m 21 |[39m })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.service.spec.ts:[32m[1m4:1[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 2 |[39m [36mimport[39m { [33mAppService[39m } [36mfrom[39m [32m'./app.service'[39m[33m;[39m
+   [90m 3 |[39m
+  [31m[1m>[22m[39m[90m 4 |[39m describe([32m'AppService'[39m[33m,[39m () [33m=>[39m {
+   [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 5 |[39m   [36mlet[39m service[33m:[39m [33mAppService[39m[33m;[39m
+   [90m 6 |[39m
+   [90m 7 |[39m   beforeAll([36masync[39m () [33m=>[39m {[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.service.spec.ts:[32m[1m7:3[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'beforeAll'.
+  [0m [90m  5 |[39m   [36mlet[39m service[33m:[39m [33mAppService[39m[33m;[39m
+   [90m  6 |[39m
+  [31m[1m>[22m[39m[90m  7 |[39m   beforeAll([36masync[39m () [33m=>[39m {
+   [90m    |[39m   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m  8 |[39m     [36mconst[39m app [33m=[39m [36mawait[39m [33mTest[39m[33m.[39mcreateTestingModule({
+   [90m  9 |[39m       providers[33m:[39m [[33mAppService[39m][33m,[39m
+   [90m 10 |[39m     })[33m.[39mcompile()[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.service.spec.ts:[32m[1m15:3[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 13 |[39m   })[33m;[39m
+   [90m 14 |[39m
+  [31m[1m>[22m[39m[90m 15 |[39m   describe([32m'getData'[39m[33m,[39m () [33m=>[39m {
+   [90m    |[39m   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+   [90m 17 |[39m       expect(service[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m
+   [90m 18 |[39m     })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.service.spec.ts:[32m[1m16:5[22m[39m[1m[39m[22m
+[90mTS2593: [39mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+  [0m [90m 14 |[39m
+   [90m 15 |[39m   describe([32m'getData'[39m[33m,[39m () [33m=>[39m {
+  [31m[1m>[22m[39m[90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+   [90m    |[39m     [31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 17 |[39m       expect(service[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m
+   [90m 18 |[39m     })[33m;[39m
+   [90m 19 |[39m   })[33m;[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.service.spec.ts:[32m[1m17:7[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'expect'.
+  [0m [90m 15 |[39m   describe([32m'getData'[39m[33m,[39m () [33m=>[39m {
+   [90m 16 |[39m     it([32m'should return "Hello API"'[39m[33m,[39m () [33m=>[39m {
+  [31m[1m>[22m[39m[90m 17 |[39m       expect(service[33m.[39mgetData())[33m.[39mtoEqual({ message[33m:[39m [32m'Hello API'[39m })[33m;[39m
+   [90m    |[39m       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 18 |[39m     })[33m;[39m
+   [90m 19 |[39m   })[33m;[39m
+   [90m 20 |[39m })[33m;[39m[0m
+
+webpack compiled with [1m[31m10 errors[39m[22m (0f0b34f45df99290)

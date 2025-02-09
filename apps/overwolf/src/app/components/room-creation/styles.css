@@ -1,0 +1,62 @@
+.room-info {
+    max-width: 400px;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.room-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.room-details {
+    background-color: rgba(31, 41, 55, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.room-id {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: #60A5FA;
+}
+
+.copy-button {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(37, 99, 235, 0.2);
+    color: #60A5FA;
+    border: 1px solid #60A5FA;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+}
+
+.copy-button:hover {
+    background-color: rgba(37, 99, 235, 0.3);
+}
+
+.participants {
+    margin-top: 1.5rem;
+}
+
+.participants h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.participants ul {
+    list-style: none;
+    padding: 0;
+}
+
+.participants li {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: rgba(31, 41, 55, 0.5);
+    margin-bottom: 0.5rem;
+}

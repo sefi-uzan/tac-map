@@ -1,0 +1,24 @@
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mCannot find module '@pmmmwh/react-refresh-webpack-plugin'[39m
+
+Require stack:
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\@nx\react\plugins\nx-react-webpack-plugin\lib\apply-react-config.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\@nx\react\plugins\nx-react-webpack-plugin\nx-react-webpack-plugin.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\@nx\react\index.js
+- C:\Users\sefiu\Documents\Repos\tac-map\apps\overwolf\webpack.config.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\@nx\webpack\src\utils\webpack\resolve-user-defined-webpack-config.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\@nx\webpack\src\executors\dev-server\dev-server.impl.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\config\schema-utils.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\command-line\run\executor-utils.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\devkit-internals.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\utils\assert-workspace-validity.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\project-graph\build-project-graph.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\project-graph\project-graph.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\project-graph\file-utils.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\utils\package-manager.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\utils\package-json.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\utils\print-help.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\src\command-line\run\run.js
+- C:\Users\sefiu\Documents\Repos\tac-map\node_modules\nx\bin\run-executor.js
+Pass --verbose to see the stacktrace.
+

@@ -1,0 +1,408 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.4.2",
+  "pathMappings": {
+    "@tac-map/shared-types": [
+      "libs/shared-types/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "devTargetName": "dev",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "5219342830899463543"
+      },
+      {
+        "file": "nx.json",
+        "hash": "13219504651378098095"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "14063989354106880070"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "3462096019013144053"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "14947917340121612566"
+      },
+      {
+        "file": "package.json",
+        "hash": "7074322825749699881"
+      },
+      {
+        "file": "vitest.workspace.ts",
+        "hash": "14023491222425291751"
+      },
+      {
+        "file": "yarn.lock",
+        "hash": "11808748729488595827"
+      }
+    ],
+    "projectFileMap": {
+      "backend": [
+        {
+          "file": "apps/backend/jest.config.ts",
+          "hash": "18005918524614647840"
+        },
+        {
+          "file": "apps/backend/project.json",
+          "hash": "7262112262083189909"
+        },
+        {
+          "file": "apps/backend/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/backend/src/app/app.module.ts",
+          "hash": "12536063745014317136",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/backend/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/backend/src/app/gateways/room.gateway.ts",
+          "hash": "12586046381897587986",
+          "deps": [
+            "npm:@nestjs/websockets",
+            "npm:socket.io",
+            "npm:uuid",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/backend/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/backend/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/backend/tsconfig.app.json",
+          "hash": "1873969056923931497"
+        },
+        {
+          "file": "apps/backend/tsconfig.json",
+          "hash": "3025378044812449119"
+        },
+        {
+          "file": "apps/backend/webpack.config.js",
+          "hash": "3227220260856614096",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "overwolf": [
+        {
+          "file": "apps/overwolf/.babelrc",
+          "hash": "353495692522178846"
+        },
+        {
+          "file": "apps/overwolf/eslint.config.mjs",
+          "hash": "8789163670399984295",
+          "deps": [
+            "npm:@nx/eslint-plugin"
+          ]
+        },
+        {
+          "file": "apps/overwolf/index.html",
+          "hash": "12575625478624103547"
+        },
+        {
+          "file": "apps/overwolf/project.json",
+          "hash": "7088755072476724243"
+        },
+        {
+          "file": "apps/overwolf/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/overwolf/public/icons/icon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/overwolf/public/icons/icon_gray.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/overwolf/public/icons/launcher_icon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/overwolf/public/manifest.json",
+          "hash": "12837280121751494764"
+        },
+        {
+          "file": "apps/overwolf/src/app/app.module.css",
+          "hash": "8887387885984320532"
+        },
+        {
+          "file": "apps/overwolf/src/app/app.tsx",
+          "hash": "4531909301419917914",
+          "deps": [
+            "shared-types",
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/components/index.ts",
+          "hash": "1218564315019183140"
+        },
+        {
+          "file": "apps/overwolf/src/app/components/room-creation/index.tsx",
+          "hash": "4037931244192861761",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/components/room-creation/styles.css",
+          "hash": "6756579676050956190"
+        },
+        {
+          "file": "apps/overwolf/src/app/components/room-join/room-join.tsx",
+          "hash": "18405600479838936657",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/components/room-join/styles.css",
+          "hash": "1338661942566437980"
+        },
+        {
+          "file": "apps/overwolf/src/app/components/shared-canvas/shared-canvas.tsx",
+          "hash": "6677791826009904370",
+          "deps": [
+            "npm:react",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/components/shared-canvas/styles.css",
+          "hash": "14309648736489042048"
+        },
+        {
+          "file": "apps/overwolf/src/app/components/tactical-map.component.ts",
+          "hash": "12781524067007023829"
+        },
+        {
+          "file": "apps/overwolf/src/app/components/user-settings/index.tsx",
+          "hash": "5329773460813930196",
+          "deps": [
+            "npm:react",
+            "npm:uuid"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/components/user-settings/styles.css",
+          "hash": "13067806360085662374"
+        },
+        {
+          "file": "apps/overwolf/src/app/controllers/background.controller.ts",
+          "hash": "1818057745477138812",
+          "deps": [
+            "npm:@overwolf/overwolf-api-ts"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/services/socket.service.ts",
+          "hash": "1119290000924658225",
+          "deps": [
+            "npm:socket.io-client"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/app/types.ts",
+          "hash": "503357983815254330"
+        },
+        {
+          "file": "apps/overwolf/src/app/types/index.ts",
+          "hash": "12244737502528683473"
+        },
+        {
+          "file": "apps/overwolf/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/overwolf/src/background.tsx",
+          "hash": "17465559565226133022"
+        },
+        {
+          "file": "apps/overwolf/src/desktop.tsx",
+          "hash": "3880575290417030218",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/environments/environment.prod.ts",
+          "hash": "17295639850496243269"
+        },
+        {
+          "file": "apps/overwolf/src/environments/environment.ts",
+          "hash": "11737346483842981157"
+        },
+        {
+          "file": "apps/overwolf/src/in-game.tsx",
+          "hash": "15149580703859354186",
+          "deps": [
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/overwolf/src/index.html",
+          "hash": "12322548062654335243"
+        },
+        {
+          "file": "apps/overwolf/src/styles.css",
+          "hash": "7946170395619996163"
+        },
+        {
+          "file": "apps/overwolf/src/types/overwolf.d.ts",
+          "hash": "13199981561699275495"
+        },
+        {
+          "file": "apps/overwolf/tailwind.config.js",
+          "hash": "11775453288783981685",
+          "deps": [
+            "npm:@tailwindcss/forms"
+          ]
+        },
+        {
+          "file": "apps/overwolf/tsconfig.app.json",
+          "hash": "3374933587361460334"
+        },
+        {
+          "file": "apps/overwolf/tsconfig.json",
+          "hash": "342361128862924080"
+        },
+        {
+          "file": "apps/overwolf/tsconfig.spec.json",
+          "hash": "2374680567064402239"
+        },
+        {
+          "file": "apps/overwolf/vite.config.ts",
+          "hash": "14286858490018700864",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react",
+            "npm:@nx/vite"
+          ]
+        },
+        {
+          "file": "apps/overwolf/webpack.config.js",
+          "hash": "8024828160373553792",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:html-webpack-plugin"
+          ]
+        }
+      ],
+      "shared-types": [
+        {
+          "file": "libs/shared-types/README.md",
+          "hash": "13984268598373994613"
+        },
+        {
+          "file": "libs/shared-types/eslint.config.mjs",
+          "hash": "14634604848122713053",
+          "deps": [
+            [
+              "npm:jsonc-eslint-parser",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "libs/shared-types/package.json",
+          "hash": "6126468468186197096",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/shared-types/project.json",
+          "hash": "10003808341076669952"
+        },
+        {
+          "file": "libs/shared-types/src/index.ts",
+          "hash": "17477233218007285873"
+        },
+        {
+          "file": "libs/shared-types/src/lib/shared-types.ts",
+          "hash": "14681083636001504625"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.json",
+          "hash": "6159797437362864955"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.lib.json",
+          "hash": "15798669420171897096"
+        }
+      ]
+    }
+  }
+}

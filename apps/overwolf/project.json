@@ -1,0 +1,77 @@
+{
+  "name": "overwolf",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/overwolf/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "development",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/overwolf",
+        "index": "apps/overwolf/src/index.html",
+        "baseHref": "./",
+        "main": "apps/overwolf/src/main.tsx",
+        "tsConfig": "apps/overwolf/tsconfig.app.json",
+        "assets": [
+          "apps/overwolf/src/assets",
+          {
+            "glob": "**/*",
+            "input": "apps/overwolf/public",
+            "output": "/"
+          }
+        ],
+        "styles": [
+          "apps/overwolf/src/styles.css"
+        ],
+        "scripts": [],
+        "webpackConfig": "apps/overwolf/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/overwolf/src/environments/environment.ts",
+              "with": "apps/overwolf/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "overwolf:build",
+        "hmr": true,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "overwolf:build:development"
+        },
+        "production": {
+          "buildTarget": "overwolf:build:production",
+          "hmr": false
+        }
+      }
+    }
+  },
+  "tags": []
+}

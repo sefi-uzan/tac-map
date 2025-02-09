@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx build overwolf --watch",
+    "startTime": "2025-02-09T20:33:47.508Z",
+    "endTime": "2025-02-09T20:33:49.103Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "overwolf:build:development",
+      "target": "build",
+      "projectName": "overwolf",
+      "hash": "10430727287672822155",
+      "startTime": "2025-02-09T20:33:47.545Z",
+      "endTime": "2025-02-09T20:33:49.101Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}
