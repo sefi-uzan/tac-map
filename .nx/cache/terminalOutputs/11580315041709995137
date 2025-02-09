@@ -1,0 +1,8 @@
+Entrypoint [1mbackground[39m[22m 8.95 KiB (32.4 KiB) = [1m[32mruntime.js[39m[22m 1.33 KiB [1m[32mbackground.js[39m[22m 7.63 KiB 2 auxiliary assets
+Entrypoint [1mdesktop[39m[22m [1m[33m[big][39m[22m 415 KiB (1.72 MiB) = [1m[32mruntime.js[39m[22m 1.33 KiB [1m[32mdesktop.bb426c7281816dce.css[39m[22m 5.55 KiB [1m[32mdesktop.js[39m[22m 408 KiB 3 auxiliary assets
+Entrypoint [1min-game[39m[22m [1m[33m[big][39m[22m 430 KiB (1.98 MiB) = [1m[32mruntime.js[39m[22m 1.33 KiB [1m[32min-game.bb426c7281816dce.css[39m[22m 5.55 KiB [1m[32min-game.js[39m[22m 423 KiB 3 auxiliary assets
+chunk (runtime: runtime) [1m[32mbackground.js[39m[22m (background) 13.7 KiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32mdesktop.bb426c7281816dce.css[39m[22m, [1m[32mdesktop.js[39m[22m (desktop) 1.15 MiB (javascript) 7.71 KiB (css/mini-extract) [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32min-game.bb426c7281816dce.css[39m[22m, [1m[32min-game.js[39m[22m (in-game) 1.38 MiB (javascript) 7.71 KiB (css/mini-extract) [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32mruntime.js[39m[22m (runtime) 3.41 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (fc27bfe2a908f9bc)

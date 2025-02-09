@@ -19,6 +19,7 @@ import {
     cors: {
         origin: '*',
     },
+    transports: ['websocket']
 })
 export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
@@ -27,6 +28,7 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
     private rooms: Map<string, Room> = new Map();
     private userSocketMap: Map<string, string> = new Map(); // userId -> socketId
     private socketUserMap: Map<string, string> = new Map(); // socketId -> userId
+    private userRoomMap: Map<string, string> = new Map(); // userId -> roomId
 
     handleConnection(client: Socket) {
         console.log(`Client connected: ${client.id}`);
@@ -36,22 +38,28 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         console.log(`Client disconnected: ${client.id}`);
         const userId = this.socketUserMap.get(client.id);
         if (userId) {
+            const roomId = this.userRoomMap.get(userId);
+            if (roomId) {
+                this.handleUserLeave(userId, roomId);
+            }
             this.userSocketMap.delete(userId);
             this.socketUserMap.delete(client.id);
+            this.userRoomMap.delete(userId);
+        }
+    }
 
-            // Find and remove user from any room they're in
-            for (const [roomId, room] of this.rooms.entries()) {
-                const userIndex = room.participants.findIndex((p: User) => p.id === userId);
-                if (userIndex !== -1) {
-                    room.participants.splice(userIndex, 1);
-                    if (room.participants.length === 0) {
-                        this.rooms.delete(roomId);
-                    } else {
-                        this.rooms.set(roomId, room);
-                        this.server.to(roomId).emit(WebSocketEvents.ROOM_UPDATED, { room });
-                    }
-                    break;
-                }
+    private handleUserLeave(userId: string, roomId: string) {
+        const room = this.rooms.get(roomId);
+        if (!room) return;
+
+        const userIndex = room.participants.findIndex(p => p.id === userId);
+        if (userIndex !== -1) {
+            room.participants.splice(userIndex, 1);
+            if (room.participants.length === 0) {
+                this.rooms.delete(roomId);
+            } else {
+                this.rooms.set(roomId, room);
+                this.server.to(roomId).emit(WebSocketEvents.ROOM_UPDATED, { room });
             }
         }
     }
@@ -61,6 +69,14 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         client: Socket,
         payload: WebSocketPayloads[WebSocketEvents.CREATE_ROOM]
     ) {
+        // Check if user is already in a room
+        const existingRoomId = this.userRoomMap.get(payload.user.id);
+        if (existingRoomId) {
+            // Leave existing room
+            this.handleUserLeave(payload.user.id, existingRoomId);
+            client.leave(existingRoomId);
+        }
+
         const roomId = uuidv4();
         const room: Room = {
             id: roomId,
@@ -71,6 +87,7 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         this.rooms.set(roomId, room);
         this.userSocketMap.set(payload.user.id, client.id);
         this.socketUserMap.set(client.id, payload.user.id);
+        this.userRoomMap.set(payload.user.id, roomId);
 
         client.join(roomId);
         client.emit(WebSocketEvents.ROOM_UPDATED, { room });
@@ -94,10 +111,30 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
             return;
         }
 
+        // Check if user is already in this room
+        const existingParticipant = room.participants.find(p => p.id === payload.user.id);
+        if (existingParticipant) {
+            // Update the socket mappings
+            this.userSocketMap.set(payload.user.id, client.id);
+            this.socketUserMap.set(client.id, payload.user.id);
+            client.join(payload.roomId);
+            client.emit(WebSocketEvents.ROOM_UPDATED, { room });
+            return;
+        }
+
+        // Check if user is in another room
+        const existingRoomId = this.userRoomMap.get(payload.user.id);
+        if (existingRoomId) {
+            // Leave existing room
+            this.handleUserLeave(payload.user.id, existingRoomId);
+            client.leave(existingRoomId);
+        }
+
         room.participants.push(payload.user);
         this.rooms.set(payload.roomId, room);
         this.userSocketMap.set(payload.user.id, client.id);
         this.socketUserMap.set(client.id, payload.user.id);
+        this.userRoomMap.set(payload.user.id, payload.roomId);
 
         client.join(payload.roomId);
         this.server.to(payload.roomId).emit(WebSocketEvents.ROOM_UPDATED, { room });
@@ -108,20 +145,12 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         client: Socket,
         payload: WebSocketPayloads[WebSocketEvents.LEAVE_ROOM]
     ) {
-        const room = this.rooms.get(payload.roomId);
-        if (!room) return;
+        const userId = this.socketUserMap.get(client.id);
+        if (!userId) return;
 
-        const userIndex = room.participants.findIndex((p: User) => p.id === payload.userId);
-        if (userIndex !== -1) {
-            room.participants.splice(userIndex, 1);
-            if (room.participants.length === 0) {
-                this.rooms.delete(payload.roomId);
-            } else {
-                this.rooms.set(payload.roomId, room);
-                client.leave(payload.roomId);
-                this.server.to(payload.roomId).emit(WebSocketEvents.ROOM_UPDATED, { room });
-            }
-        }
+        this.handleUserLeave(userId, payload.roomId);
+        client.leave(payload.roomId);
+        this.userRoomMap.delete(userId);
     }
 
     @SubscribeMessage(WebSocketEvents.DRAW)

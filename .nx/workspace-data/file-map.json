@@ -41,52 +41,52 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "nx.json",
-        "hash": "13219504651378098095"
-      },
-      {
-        "file": "railway.json",
-        "hash": "5731643685985608413"
+        "file": "jest.preset.js",
+        "hash": "5219342830899463543"
       },
       {
         "file": "yarn.lock",
         "hash": "11808748729488595827"
       },
       {
-        "file": "eslint.config.mjs",
-        "hash": "3462096019013144053"
-      },
-      {
         "file": "tsconfig.base.json",
         "hash": "14063989354106880070"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
       },
       {
         "file": ".gitignore",
         "hash": "14947917340121612566"
       },
       {
-        "file": "Procfile",
-        "hash": "13727279197469321473"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "5219342830899463543"
-      },
-      {
         "file": "package.json",
         "hash": "7074322825749699881"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "3462096019013144053"
+      },
+      {
+        "file": "Procfile",
+        "hash": "13727279197469321473"
       },
       {
         "file": ".prettierignore",
         "hash": "14688272390704683536"
       },
       {
+        "file": "nx.json",
+        "hash": "13219504651378098095"
+      },
+      {
         "file": "vitest.workspace.ts",
         "hash": "14023491222425291751"
+      },
+      {
+        "file": "railway.json",
+        "hash": "5731643685985608413"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
       }
     ],
     "projectFileMap": {
@@ -122,7 +122,7 @@
         },
         {
           "file": "apps/backend/src/app/gateways/room.gateway.ts",
-          "hash": "12586046381897587986",
+          "hash": "9779832360885340424",
           "deps": [
             "npm:@nestjs/websockets",
             "npm:socket.io",
@@ -281,7 +281,7 @@
         },
         {
           "file": "apps/overwolf/src/app/services/socket.service.ts",
-          "hash": "1119290000924658225",
+          "hash": "8980790928792787997",
           "deps": [
             "npm:socket.io-client"
           ]

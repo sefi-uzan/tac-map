@@ -9,6 +9,8 @@ export class SocketService {
     private socket: Socket | null = null;
     private currentRoom: Room | null = null;
     private listeners: Map<string, SocketCallback[]> = new Map();
+    private reconnectAttempts = 0;
+    private maxReconnectAttempts = 5;
 
     private constructor() {
         // Private constructor for singleton pattern
@@ -25,6 +27,9 @@ export class SocketService {
         if (!this.socket) {
             this.socket = io(environment.socketUrl, {
                 reconnectionDelayMax: 10000,
+                reconnectionAttempts: this.maxReconnectAttempts,
+                transports: ['websocket'],
+                autoConnect: true
             });
             this.setupListeners();
         }
@@ -33,6 +38,11 @@ export class SocketService {
 
     public disconnect() {
         if (this.socket) {
+            // Leave current room before disconnecting
+            if (this.currentRoom) {
+                this.leaveRoom(this.currentRoom.id);
+            }
+
             // Remove all listeners
             this.listeners.forEach((callbacks, event) => {
                 callbacks.forEach(callback => {
@@ -44,6 +54,7 @@ export class SocketService {
             this.socket.disconnect();
             this.socket = null;
             this.currentRoom = null;
+            this.reconnectAttempts = 0;
         }
     }
 
@@ -52,6 +63,14 @@ export class SocketService {
 
         this.socket.on('connect', () => {
             console.log('Connected to server');
+            this.reconnectAttempts = 0;
+
+            // Rejoin room if we were in one
+            if (this.currentRoom) {
+                const room = this.currentRoom;
+                this.currentRoom = null; // Clear it first to avoid duplicate joins
+                this.rejoinRoom(room);
+            }
         });
 
         this.socket.on('disconnect', () => {
@@ -60,7 +79,26 @@ export class SocketService {
 
         this.socket.on('error', (error: { message: string }) => {
             console.error('Socket error:', error.message);
+            if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                this.reconnectAttempts++;
+                setTimeout(() => this.connect(), 1000 * this.reconnectAttempts);
+            }
         });
+
+        this.socket.on('roomUpdated', ({ room }: { room: Room }) => {
+            this.currentRoom = room;
+        });
+    }
+
+    private async rejoinRoom(room: Room) {
+        try {
+            const user = room.participants.find(p => this.socket?.id === p.id);
+            if (user) {
+                await this.joinRoom(room.id, user);
+            }
+        } catch (error) {
+            console.error('Failed to rejoin room:', error);
+        }
     }
 
     public createRoom(user: User): Promise<Room> {
@@ -69,16 +107,28 @@ export class SocketService {
                 this.socket = this.connect();
             }
 
+            // Leave current room if any
+            if (this.currentRoom) {
+                this.leaveRoom(this.currentRoom.id);
+            }
+
             this.socket.emit('createRoom', { user });
 
-            this.socket.once('roomUpdated', ({ room }: { room: Room }) => {
+            const handleRoomUpdate = ({ room }: { room: Room }) => {
                 this.currentRoom = room;
+                this.socket?.off('roomUpdated', handleRoomUpdate);
+                this.socket?.off('error', handleError);
                 resolve(room);
-            });
+            };
 
-            this.socket.once('error', (error: { message: string }) => {
+            const handleError = (error: { message: string }) => {
+                this.socket?.off('roomUpdated', handleRoomUpdate);
+                this.socket?.off('error', handleError);
                 reject(new Error(error.message));
-            });
+            };
+
+            this.socket.once('roomUpdated', handleRoomUpdate);
+            this.socket.once('error', handleError);
         });
     }
 
@@ -88,16 +138,28 @@ export class SocketService {
                 this.socket = this.connect();
             }
 
+            // Leave current room if any
+            if (this.currentRoom) {
+                this.leaveRoom(this.currentRoom.id);
+            }
+
             this.socket.emit('joinRoom', { roomId, user });
 
-            this.socket.once('roomUpdated', ({ room }: { room: Room }) => {
+            const handleRoomUpdate = ({ room }: { room: Room }) => {
                 this.currentRoom = room;
+                this.socket?.off('roomUpdated', handleRoomUpdate);
+                this.socket?.off('error', handleError);
                 resolve(room);
-            });
+            };
 
-            this.socket.once('error', (error: { message: string }) => {
+            const handleError = (error: { message: string }) => {
+                this.socket?.off('roomUpdated', handleRoomUpdate);
+                this.socket?.off('error', handleError);
                 reject(new Error(error.message));
-            });
+            };
+
+            this.socket.once('roomUpdated', handleRoomUpdate);
+            this.socket.once('error', handleError);
         });
     }
 
