@@ -41,44 +41,52 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "5219342830899463543"
-      },
-      {
         "file": "nx.json",
         "hash": "13219504651378098095"
       },
       {
-        "file": ".prettierignore",
-        "hash": "14688272390704683536"
+        "file": "railway.json",
+        "hash": "5731643685985608413"
       },
       {
-        "file": "tsconfig.base.json",
-        "hash": "14063989354106880070"
+        "file": "yarn.lock",
+        "hash": "11808748729488595827"
       },
       {
         "file": "eslint.config.mjs",
         "hash": "3462096019013144053"
       },
       {
+        "file": "tsconfig.base.json",
+        "hash": "14063989354106880070"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
         "file": ".gitignore",
         "hash": "14947917340121612566"
+      },
+      {
+        "file": "Procfile",
+        "hash": "13727279197469321473"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "5219342830899463543"
       },
       {
         "file": "package.json",
         "hash": "7074322825749699881"
       },
       {
-        "file": "vitest.workspace.ts",
-        "hash": "14023491222425291751"
+        "file": ".prettierignore",
+        "hash": "14688272390704683536"
       },
       {
-        "file": "yarn.lock",
-        "hash": "11808748729488595827"
+        "file": "vitest.workspace.ts",
+        "hash": "14023491222425291751"
       }
     ],
     "projectFileMap": {
@@ -127,8 +135,16 @@
           "hash": "3244421341483603138"
         },
         {
+          "file": "apps/backend/src/environments/environment.prod.ts",
+          "hash": "9598877375380306886"
+        },
+        {
+          "file": "apps/backend/src/environments/environment.ts",
+          "hash": "6932767126548185767"
+        },
+        {
           "file": "apps/backend/src/main.ts",
-          "hash": "150780270862474464",
+          "hash": "15013996081685669340",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core"
@@ -296,7 +312,7 @@
         },
         {
           "file": "apps/overwolf/src/environments/environment.prod.ts",
-          "hash": "17295639850496243269"
+          "hash": "9978648407681729129"
         },
         {
           "file": "apps/overwolf/src/environments/environment.ts",

@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    wsUrl: 'https://your-production-server.com',
+    socketUrl: 'wss://web-production-bb3c.up.railway.app'
 }; 
