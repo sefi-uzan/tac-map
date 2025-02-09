@@ -15,6 +15,10 @@ import {
     WebSocketPayloads,
 } from '@tac-map/shared-types';
 
+interface RoomState extends Room {
+    drawingHistory: DrawingData[];
+}
+
 @WebSocketGateway({
     cors: {
         origin: '*',
@@ -25,7 +29,7 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     server: Server;
 
-    private rooms: Map<string, Room> = new Map();
+    private rooms: Map<string, RoomState> = new Map();
     private userSocketMap: Map<string, string> = new Map(); // userId -> socketId
     private socketUserMap: Map<string, string> = new Map(); // socketId -> userId
     private userRoomMap: Map<string, string> = new Map(); // userId -> roomId
@@ -78,10 +82,11 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
 
         const roomId = uuidv4();
-        const room: Room = {
+        const room: RoomState = {
             id: roomId,
             participants: [payload.user],
             maxParticipants: 5,
+            drawingHistory: []
         };
 
         this.rooms.set(roomId, room);
@@ -119,6 +124,14 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
             this.socketUserMap.set(client.id, payload.user.id);
             client.join(payload.roomId);
             client.emit(WebSocketEvents.ROOM_UPDATED, { room });
+
+            // Send drawing history to the rejoining user
+            room.drawingHistory.forEach(drawing => {
+                client.emit(WebSocketEvents.DRAWING_UPDATED, {
+                    roomId: room.id,
+                    drawingData: drawing
+                });
+            });
             return;
         }
 
@@ -138,6 +151,14 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
         client.join(payload.roomId);
         this.server.to(payload.roomId).emit(WebSocketEvents.ROOM_UPDATED, { room });
+
+        // Send drawing history to the new user
+        room.drawingHistory.forEach(drawing => {
+            client.emit(WebSocketEvents.DRAWING_UPDATED, {
+                roomId: room.id,
+                drawingData: drawing
+            });
+        });
     }
 
     @SubscribeMessage(WebSocketEvents.LEAVE_ROOM)
@@ -161,6 +182,10 @@ export class RoomGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const room = this.rooms.get(payload.roomId);
         if (!room) return;
 
+        // Store the drawing in history
+        room.drawingHistory.push(payload.drawingData);
+
+        // Broadcast to all participants
         this.server
             .to(payload.roomId)
             .emit(WebSocketEvents.DRAWING_UPDATED, payload);

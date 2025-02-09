@@ -124,18 +124,14 @@ export function App({ windowType }: Props) {
     setTimeout(() => setError(null), 3000);
   };
 
-  // Add extra transparency for in-game window
-  const isInGameWindow = windowType === 'inGameWindow';
-  const bgClass = isInGameWindow ? 'bg-gray-900/80' : 'bg-gray-900';
-  const headerBgClass = isInGameWindow ? 'bg-gray-800/80' : 'bg-gray-800';
-
   // Show message if no user settings in in-game window
-  if (isInGameWindow && !currentUser) {
+  if (windowType === 'inGameWindow' && !currentUser) {
     return (
       <div className="window-base">
         <div className="window-header draggable" onMouseDown={handleDragStart}>
           <h1>Tactical Map (In-Game)</h1>
           <div className="window-controls no-drag">
+            <button onClick={handleMinimize}>_</button>
             <button onClick={handleClose}>✕</button>
           </div>
         </div>
@@ -151,12 +147,13 @@ export function App({ windowType }: Props) {
   }
 
   // Show message if no room in in-game window
-  if (isInGameWindow && !currentRoom) {
+  if (windowType === 'inGameWindow' && !currentRoom) {
     return (
       <div className="window-base">
         <div className="window-header draggable" onMouseDown={handleDragStart}>
           <h1>Tactical Map (In-Game)</h1>
           <div className="window-controls no-drag">
+            <button onClick={handleMinimize}>_</button>
             <button onClick={handleClose}>✕</button>
           </div>
         </div>
@@ -171,14 +168,104 @@ export function App({ windowType }: Props) {
     );
   }
 
+  // Desktop window - Room Management
+  if (windowType === 'mainWindow') {
+    return (
+      <div className="window-base">
+        <div className="window-header draggable" onMouseDown={handleDragStart}>
+          <h1>Tactical Map</h1>
+          <div className="window-controls no-drag">
+            {currentRoom && (
+              <button onClick={handleLeaveRoom}>Leave Room</button>
+            )}
+            <button onClick={handleMinimize}>_</button>
+            <button onClick={handleClose}>✕</button>
+          </div>
+        </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+            <button className="close-error" onClick={() => setError(null)}>×</button>
+          </div>
+        )}
+
+        <div className="window-content">
+          {!currentUser ? (
+            <div className="flex flex-col items-center justify-center h-full">
+              <h2>Welcome to Tactical Map</h2>
+              <UserSettingsForm onSave={handleUserSubmit} />
+            </div>
+          ) : !currentRoom ? (
+            <div className="flex flex-col items-center justify-center h-full gap-4">
+              <RoomCreation
+                userSettings={currentUser}
+                onRoomJoined={handleRoomJoined}
+                onError={handleError}
+              />
+              <div className="text-center text-gray-400 my-4">or</div>
+              <RoomJoin
+                userSettings={currentUser}
+                onRoomJoined={handleRoomJoined}
+                onError={handleError}
+              />
+            </div>
+          ) : (
+            <div className="room-management p-6">
+              <div className="room-info bg-gray-800 rounded-lg p-4 mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-semibold">Room Information</h2>
+                  <div className="room-id-container">
+                    <span className="text-gray-400 mr-2">Room ID:</span>
+                    <code className="bg-gray-700 px-3 py-1 rounded cursor-pointer select-all"
+                      onClick={() => navigator.clipboard.writeText(currentRoom.id)}>
+                      {currentRoom.id}
+                    </code>
+                  </div>
+                </div>
+                <div className="participants-list">
+                  <h3 className="text-gray-400 mb-2">Participants:</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {currentRoom.participants.map((participant) => (
+                      <div
+                        key={participant.id}
+                        className="participant-card bg-gray-700 p-2 rounded flex items-center gap-2"
+                      >
+                        <span
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: participant.color }}
+                        />
+                        <span>
+                          {participant.nickname}
+                          {participant.id === currentUser.id && ' (You)'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="instructions bg-gray-800 rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-2">Instructions</h3>
+                <ul className="list-disc list-inside text-gray-300 space-y-2">
+                  <li>Share the Room ID with your teammates to let them join</li>
+                  <li>Launch your game to access the in-game overlay</li>
+                  <li>Use Ctrl+F to show/hide the overlay during game</li>
+                  <li>All participants will see the drawings in real-time</li>
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // In-game window - Drawing Canvas
   return (
     <div className="window-base">
       <div className="window-header draggable" onMouseDown={handleDragStart}>
-        <h1>Tactical Map {isInGameWindow ? '(In-Game)' : ''}</h1>
+        <h1>Tactical Map (In-Game)</h1>
         <div className="window-controls no-drag">
-          {currentRoom && (
-            <button onClick={handleLeaveRoom}>Leave Room</button>
-          )}
           <button onClick={handleMinimize}>_</button>
           <button onClick={handleClose}>✕</button>
         </div>
@@ -192,31 +279,10 @@ export function App({ windowType }: Props) {
       )}
 
       <div className="window-content">
-        {!currentUser ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            <h2>Welcome to Tactical Map</h2>
-            <UserSettingsForm onSave={handleUserSubmit} />
-          </div>
-        ) : !currentRoom ? (
-          <div className="flex flex-col items-center justify-center h-full gap-4">
-            <RoomCreation
-              userSettings={currentUser}
-              onRoomJoined={handleRoomJoined}
-              onError={handleError}
-            />
-            <div className="text-center text-gray-400 my-4">or</div>
-            <RoomJoin
-              userSettings={currentUser}
-              onRoomJoined={handleRoomJoined}
-              onError={handleError}
-            />
-          </div>
-        ) : (
-          <SharedCanvas
-            room={currentRoom}
-            userSettings={currentUser}
-          />
-        )}
+        <SharedCanvas
+          room={currentRoom!}
+          userSettings={currentUser!}
+        />
       </div>
     </div>
   );
